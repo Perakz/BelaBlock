@@ -1,0 +1,164 @@
+import os
+from tkinter import *
+import tkinter.font as font
+from PIL import ImageTk, Image
+from os import listdir
+from os.path import isfile, join
+
+
+def new(event1):
+    newprozor = Toplevel(main)
+    newprozor.geometry("500x600+1170+0")
+    newprozor.title("Nova igra")
+    newprozor.resizable(False, False)
+    NewFont2 = font.Font(family="Helvatica", size=20)
+    Label(newprozor, font=NewFont2, text='IME IGRE:').pack()
+    unosimenaigre = Entry(newprozor, font=NewFont2)
+    unosimenaigre.pack()
+    Label(newprozor, text=" ").pack()
+    Label(newprozor, font=NewFont2, text='TEAM 1:').pack()
+    imeprvogclanatima1 = Entry(newprozor, font=NewFont2)
+    imeprvogclanatima1.pack()
+    Label(newprozor, text=" ").pack()
+    imedrugogclanatima1 = Entry(newprozor, font=NewFont2)
+    imedrugogclanatima1.pack()
+    Label(newprozor, text=" ").pack()
+    Label(newprozor, font=NewFont2, text='TEAM 2:').pack()
+    imeprvogclanatima2 = Entry(newprozor, font=NewFont2)
+    imeprvogclanatima2.pack()
+    Label(newprozor, text=" ").pack()
+    imedrugogclanatima2 = Entry(newprozor, font=NewFont2)
+    imedrugogclanatima2.pack()
+    Label(newprozor, text=" ").pack()
+    Label(newprozor, font=NewFont2, text="BODOVNI PRAG:").pack()
+    bodovni = Entry(newprozor, font=NewFont2)
+    bodovni.pack()
+
+    def create(event2):
+        a = unosimenaigre.get()
+        save_path = "C:/Users/Windows/PycharmProjects/Bela/GamesBela"
+        file_name = os.path.join(save_path, a + ".txt")
+        file = open(file_name, "w")
+        b = imeprvogclanatima1.get()
+        c = imedrugogclanatima1.get()
+        d = imeprvogclanatima2.get()
+        e = imedrugogclanatima2.get()
+        bp = bodovni.get()
+        file.write(a)
+        file.write("\n")
+        file.write(b)
+        file.write("\n")
+        file.write(c)
+        file.write("\n")
+        file.write(d)
+        file.write("\n")
+        file.write(e)
+        file.write("\n")
+        file.write(bp)
+        file.write("\n")
+        igra1 = Toplevel(newprozor)
+        igra1.geometry("500x600+1170+0")
+        igra1.title("" + a)
+        igra1.resizable(False, False)
+
+        def unos(event214):
+            unosv = Toplevel(igra1)
+            unosv.geometry("500x600+1170+0")
+            unosv.title("Unos")
+            Unosvfont = font.Font(family="Helvatica", size=30)
+            Label(unosv, font=Unosvfont, text="Broj bodova (TEAM 1)").pack()
+            Label(unosv, font=Unosvfont).pack()
+            brojbodova1team = Entry(unosv, font=NewFont2)
+            brojbodova1team.pack()
+            f = brojbodova1team.get()
+            global f
+
+            def exit(event341):
+                unosv.destroy()
+                unosv.update()
+                return
+
+            unesigame = Button(unosv, text="UNESI")
+            unesigame.bind("<Button>", exit)
+            unesigame.pack()
+            unesigame["font"] = Unosvfont
+            unesigame.pack()
+            unesigame.config(bg="red")
+            unesigame.place(y=500, height=100, width=500)
+            unosv.mainloop()
+            return
+        unos(event214)
+        file.write(f)
+        file.close()
+        noviunos = Button(igra1, text="NOVI UNOS")
+        noviunos.bind("<Button>", unos)
+        noviunos["font"] = NewFont3
+        noviunos.pack()
+        noviunos.config(bg="red")
+        noviunos.place(y=470, height=100, width=500)
+        rezultat = Label(igra1, text="REZULTAT:" + a)
+        rezultat["font"] = NewFont2
+        rezultat.pack()
+        rezultat_timovi = Label(igra1, text="TEAM 1.                   TEAM 2.")
+        rezultat_timovi["font"] = NewFont2
+        rezultat_timovi.pack()
+        igra1.mainloop()
+        return
+
+    creategame = Button(newprozor, text="CREATE GAME")
+    NewFont3 = font.Font(family="Helvatica", size=50)
+    creategame.bind("<Button>", create)
+    creategame["font"] = NewFont3
+    creategame.pack()
+    creategame.config(bg="red")
+    creategame.place(y=500, height=100, width=500)
+    newprozor.mainloop()
+    return
+
+
+def load(event5):
+    loadp = Toplevel(main)
+    loadp.geometry("500x600+1170+0")
+    loadp.title("Load")
+    Loadfont = font.Font(family="Helvatica", size=20)
+    Label(loadp, font=Loadfont, text='IME IGRE:').pack()
+    loadp.mainloop()
+    mypath = "C:/Users/Windows/PycharmProjects/Bela/GamesBela"
+    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    for i in files:
+        Label(loadp, font=Loadfont, text="" + i).pack()
+    return
+
+
+# Glavni prozor
+main = Tk()
+main.geometry("500x700+1170+0")
+main.resizable(False, False)
+main.title("Bela Blok")
+praznina = Label(main, text=" \n \n \n \n").pack()
+
+# Glavna slika
+glavnaslika = Canvas(main, width=300, height=300)
+glavnaslika.pack()
+img = ImageTk.PhotoImage(Image.open("Bela2.png"))
+glavnaslika.create_image(150, 100, image=img)
+
+# New-gumb
+NewFont = font.Font(family="Helvatica", size=50)
+newgame = Button(main, text="NEW GAME")
+newgame.bind("<Button>", new)
+newgame["font"] = NewFont
+newgame.pack()
+newgame.config(bg="red")
+newgame.place(y=400, height=100, width=500)
+
+# Load-gumb
+NewFont = font.Font(family="Helvatica", size=50)
+loadgame = Button(main, text="LOAD GAME")
+loadgame.bind("<Button>", load)
+loadgame["font"] = NewFont
+loadgame.pack()
+loadgame.config(bg="green")
+loadgame.place(y=550, height=100, width=500)
+
+main.mainloop()
