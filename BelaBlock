@@ -1,9 +1,8 @@
-import os
+
 from tkinter import *
 import tkinter.font as font
 from PIL import ImageTk, Image
-from os import listdir
-from os.path import isfile, join
+import os
 
 
 def new(event1):
@@ -35,6 +34,7 @@ def new(event1):
     bodovni.pack()
 
     def create(event2):
+        global file_name
         a = unosimenaigre.get()
         save_path = "C:/Users/Windows/PycharmProjects/Bela/GamesBela"
         file_name = os.path.join(save_path, a + ".txt")
@@ -56,6 +56,7 @@ def new(event1):
         file.write("\n")
         file.write(bp)
         file.write("\n")
+        file.close()
         igra1 = Toplevel(newprozor)
         igra1.geometry("500x600+1170+0")
         igra1.title("" + a)
@@ -65,21 +66,47 @@ def new(event1):
             unosv = Toplevel(igra1)
             unosv.geometry("500x600+1170+0")
             unosv.title("Unos")
-            Unosvfont = font.Font(family="Helvatica", size=30)
+            Unosvfont = font.Font(family="Helvatica", size=25)
             Label(unosv, font=Unosvfont, text="Broj bodova (TEAM 1)").pack()
             Label(unosv, font=Unosvfont).pack()
             brojbodova1team = Entry(unosv, font=NewFont2)
             brojbodova1team.pack()
-            f = brojbodova1team.get()
-            global f
+            Label(unosv, font=Unosvfont, text="").pack()
+            Label(unosv, font=Unosvfont, text="Zvanje (TEAM 1)").pack()
+            Label(unosv, font=Unosvfont).pack()
+            zvanje1team = Entry(unosv, font=NewFont2)
+            zvanje1team.pack()
+            Label(unosv, font=Unosvfont, text="").pack()
+            Label(unosv, font=Unosvfont, text="Zvanje (TEAM 2)").pack()
+            Label(unosv, font=Unosvfont).pack()
+            zvanje2team = Entry(unosv, font=NewFont2)
+            zvanje2team.pack()
 
-            def exit(event341):
+            def labelcreation(event123425):
+                f = brojbodova1team.get()
+                fint = int(f)
+                file2 = open(file_name, "a")
+                file2.write(str(f))
+                file2.close()
+                zvanje1teama = zvanje1team.get()
+                zvanje1teamaint = int(zvanje1teama)
+                zvanje2teama = zvanje2team.get()
+                zvanje2teamaint = int(zvanje2teama)
+                gint = 162 - fint
+                fuk = fint + zvanje1teamaint
+                guk = gint + zvanje2teamaint
+                Label(igra1, font=Unosvfont, text="" + str(fuk))
+                Label(igra1, font=Unosvfont, text="" + str(guk))
+                return
+            
+            def exit(event2134):
                 unosv.destroy()
                 unosv.update()
                 return
 
             unesigame = Button(unosv, text="UNESI")
             unesigame.bind("<Button>", exit)
+            unesigame.bind("<Button>", labelcreation)
             unesigame.pack()
             unesigame["font"] = Unosvfont
             unesigame.pack()
@@ -87,9 +114,7 @@ def new(event1):
             unesigame.place(y=500, height=100, width=500)
             unosv.mainloop()
             return
-        unos(event214)
-        file.write(f)
-        file.close()
+
         noviunos = Button(igra1, text="NOVI UNOS")
         noviunos.bind("<Button>", unos)
         noviunos["font"] = NewFont3
@@ -122,13 +147,12 @@ def load(event5):
     loadp.title("Load")
     Loadfont = font.Font(family="Helvatica", size=20)
     Label(loadp, font=Loadfont, text='IME IGRE:').pack()
+    arr = os.listdir("C:/Users/Windows/PycharmProjects/Bela/GamesBela/")
+    listlen = len(arr)
+#  Buttonsss = []
+#   for i in range(listlen):
+#        Buttonsss.append(Button(main, text=""+arr[i], command=lambda i=i: Buttonsss.open_this(i)))
     loadp.mainloop()
-    mypath = "C:/Users/Windows/PycharmProjects/Bela/GamesBela"
-    files = [f for f in listdir(mypath) if isfile(join(mypath, f))]
-    for i in files:
-        Label(loadp, font=Loadfont, text="" + i).pack()
-    return
-
 
 # Glavni prozor
 main = Tk()
