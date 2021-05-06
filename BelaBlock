@@ -1,8 +1,10 @@
-
 from tkinter import *
 import tkinter.font as font
 from PIL import ImageTk, Image
 import os
+
+ukupnibodovi1 = 0
+ukupnibodovi2 = 0
 
 
 def new(event1):
@@ -44,6 +46,7 @@ def new(event1):
         d = imeprvogclanatima2.get()
         e = imedrugogclanatima2.get()
         bp = bodovni.get()
+        bpint = int(bp)
         file.write(a)
         file.write("\n")
         file.write(b)
@@ -83,11 +86,13 @@ def new(event1):
             zvanje2team.pack()
 
             def labelcreation(event123425):
+                global ukupnibodovi1
+                global ukupnibodovi2
                 f = brojbodova1team.get()
                 fint = int(f)
-                file2 = open(file_name, "a")
-                file2.write(str(f))
-                file2.close()
+                #file2 = open(file_name, "a")
+                #file2.write(str(f))
+                #file2.close()
                 zvanje1teama = zvanje1team.get()
                 zvanje1teamaint = int(zvanje1teama)
                 zvanje2teama = zvanje2team.get()
@@ -95,17 +100,29 @@ def new(event1):
                 gint = 162 - fint
                 fuk = fint + zvanje1teamaint
                 guk = gint + zvanje2teamaint
-                Label(igra1, font=Unosvfont, text="" + str(fuk))
-                Label(igra1, font=Unosvfont, text="" + str(guk))
-                return
-            
-            def exit(event2134):
+                Label(igra1, font=Unosvfont, text="" + str(fuk) + "                     "+str(guk)).pack()
                 unosv.destroy()
                 unosv.update()
+                ukupnibodovi1 = ukupnibodovi1 + fuk
+                ukupnibodovi2 = ukupnibodovi2 + guk
+                ukupnibodovi.config(text="" + str(ukupnibodovi1) + "                     "+str(ukupnibodovi2))
+                if ukupnibodovi1 >= bpint or ukupnibodovi2 >= bpint:
+                    if ukupnibodovi1 >= bpint:
+                        if ukupnibodovi1 >= bpint and ukupnibodovi2 >= bpint:
+                            max = ukupnibodovi1
+                            if ukupnibodovi2 >= max:
+                                rezultat_timovi.config(text="TEAM 2 JE POBJEDNIK!")
+                        else:
+                            rezultat_timovi.config(text="TEAM 1 JE POBJEDNIK!")
+                    if ukupnibodovi2 >= bpint:
+                        if ukupnibodovi1 >= bpint and ukupnibodovi2 >= bpint:
+                            max = ukupnibodovi2
+                            if ukupnibodovi1 >= max:
+                                rezultat_timovi.config(text="TEAM 1 JE POBJEDNIK!")
+                        else:
+                            rezultat_timovi.config(text="TEAM 2 JE POBJEDNIK!")
                 return
-
             unesigame = Button(unosv, text="UNESI")
-            unesigame.bind("<Button>", exit)
             unesigame.bind("<Button>", labelcreation)
             unesigame.pack()
             unesigame["font"] = Unosvfont
@@ -115,6 +132,12 @@ def new(event1):
             unosv.mainloop()
             return
 
+        global ukupnibodovi1
+        global ukupnibodovi2
+        font1234 = font.Font(family="Helvatica", size=25)
+        ukupnibodovi = Label(igra1, font=font1234, text="" + str(ukupnibodovi1) + "                          " + str(ukupnibodovi2))
+        ukupnibodovi.place(y=420, height=50, width=500)
+        ukupnibodovi.config(bg="green")
         noviunos = Button(igra1, text="NOVI UNOS")
         noviunos.bind("<Button>", unos)
         noviunos["font"] = NewFont3
