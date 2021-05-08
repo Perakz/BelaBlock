@@ -134,13 +134,13 @@ def new(event1):
             unesigame.config(bg="red")
             unesigame.place(y=600, height=100, width=500)
 
-            #canvas = Canvas(top1)
-            #canvas.pack(side=LEFT)
-            #canvas.configure(yscrollcommand=sb.set)
-            #canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-            #myframe = Frame(canvas)
-            #canvas.create_window((0, 0), window=myframe, anchor="nw")
-            #unosv.mainloop()
+            # canvas = Canvas(top1)
+            # canvas.pack(side=LEFT)
+            # canvas.configure(yscrollcommand=sb.set)
+            # canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+            # myframe = Frame(canvas)
+            # canvas.create_window((0, 0), window=myframe, anchor="nw")
+            # unosv.mainloop()
             return
 
         def onFrameConfigure(canvas):
