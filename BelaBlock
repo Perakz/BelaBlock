@@ -1,11 +1,9 @@
 from tkinter import *
 import tkinter.font as font
-import os
 from PIL import ImageTk, Image
 
 ukupnibodovi1 = 0
 ukupnibodovi2 = 0
-roundcounter = 0
 
 
 def new(event1):
@@ -13,35 +11,35 @@ def new(event1):
     newprozor.geometry("500x600+1170+0")
     newprozor.title("Nova igra")
     newprozor.resizable(False, False)
+    newprozor.config(bg="green")
     NewFont2 = font.Font(family="Helvatica", size=20)
-    Label(newprozor, font=NewFont2, text='IME IGRE:').pack()
+    imeigre = Label(newprozor, font=NewFont2, text='IME IGRE:')
+    imeigre.config(bg="green")
+    imeigre.pack()
     unosimenaigre = Entry(newprozor, font=NewFont2)
-    unosimenaigre.pack()
-    Label(newprozor, text=" ").pack()
-    Label(newprozor, font=NewFont2, text='TEAM 1:').pack()
+    unosimenaigre.pack(pady=10)
+    team1 = Label(newprozor, font=NewFont2, text='TEAM 1:')
+    team1.config(bg="green")
+    team1.pack()
     imeprvogclanatima1 = Entry(newprozor, font=NewFont2)
-    imeprvogclanatima1.pack()
-    Label(newprozor, text=" ").pack()
+    imeprvogclanatima1.pack(pady=10)
     imedrugogclanatima1 = Entry(newprozor, font=NewFont2)
-    imedrugogclanatima1.pack()
-    Label(newprozor, text=" ").pack()
-    Label(newprozor, font=NewFont2, text='TEAM 2:').pack()
+    imedrugogclanatima1.pack(pady=10)
+    team2 = Label(newprozor, font=NewFont2, text='TEAM 2:')
+    team2.config(bg="green")
+    team2.pack()
     imeprvogclanatima2 = Entry(newprozor, font=NewFont2)
-    imeprvogclanatima2.pack()
-    Label(newprozor, text=" ").pack()
+    imeprvogclanatima2.pack(pady=10)
     imedrugogclanatima2 = Entry(newprozor, font=NewFont2)
-    imedrugogclanatima2.pack()
-    Label(newprozor, text=" ").pack()
-    Label(newprozor, font=NewFont2, text="BODOVNI PRAG:").pack()
+    imedrugogclanatima2.pack(pady=10)
+    bodovniprag = Label(newprozor, font=NewFont2, text="BODOVNI PRAG:")
+    bodovniprag.config(bg="green")
+    bodovniprag.pack(pady=10)
     bodovni = Entry(newprozor, font=NewFont2)
     bodovni.pack()
 
     def create(event2):
-        global roundcounter
         a = unosimenaigre.get()
-        save_path = "C:/Users/Windows/PycharmProjects/Bela/GamesBela"
-        file_name = os.path.join(save_path, a + ".txt")
-        file = open(file_name, "w")
         b = imeprvogclanatima1.get()
         c = imedrugogclanatima1.get()
         d = imeprvogclanatima2.get()
@@ -50,19 +48,6 @@ def new(event1):
         if bp == "":
             bp = 0
         bpint = int(bp)
-        file.write(a)
-        file.write("\n")
-        file.write(b)
-        file.write("\n")
-        file.write(c)
-        file.write("\n")
-        file.write(d)
-        file.write("\n")
-        file.write(e)
-        file.write("\n")
-        file.write(str(bp))
-        file.write("\n")
-        file.close()
         igra1 = Toplevel(newprozor)
         igra1.geometry("500x700+1170+0")
         igra1.title("" + a)
@@ -74,39 +59,34 @@ def new(event1):
         top1.pack(side=TOP, expand=False)
         top1.pack_propagate(0)
 
-        # sb = Scrollbar (top1, orient= "vertical")
-        # sb.pack(side=RIGHT, fill ="y")
-        # canvas = Canvas (top1)
-        # canvas.pack(side=LEFT)
-        # canvas.configure(yscrollcommand=sb.set)
-        # canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
-        # myframe = Frame(canvas)
-        # canvas.create_window((0,0), window=myframe, anchor="nw")
+
         def unos(event214):
-            global roundcounter
+            global canvas
             unosv = Toplevel(igra1)
             unosv.geometry("500x700+1170+0")
             unosv.title("Unos")
+            unosv.config(bg="green")
             Unosvfont = font.Font(family="Helvatica", size=25)
-            Label(unosv, font=Unosvfont, text="Broj bodova (TEAM 1)").pack()
-            Label(unosv, font=Unosvfont).pack()
+            brojbodovat1 = Label(unosv, font=Unosvfont, text="Broj bodova (TEAM 1)")
+            brojbodovat1.config(bg="green")
+            brojbodovat1.pack(pady=40)
             brojbodova1team = Entry(unosv, font=NewFont2)
-            brojbodova1team.pack()
-            Label(unosv, font=Unosvfont, text="").pack()
-            Label(unosv, font=Unosvfont, text="Zvanje (TEAM 1)").pack()
-            Label(unosv, font=Unosvfont).pack()
+            brojbodova1team.pack(pady=15)
+            zvanjet1 = Label(unosv, font=Unosvfont, text="Zvanje (TEAM 1)")
+            zvanjet1.config(bg="green")
+            zvanjet1.pack(pady=20)
             zvanje1team = Entry(unosv, font=NewFont2)
-            zvanje1team.pack()
-            Label(unosv, font=Unosvfont, text="").pack()
-            Label(unosv, font=Unosvfont, text="Zvanje (TEAM 2)").pack()
-            Label(unosv, font=Unosvfont).pack()
+            zvanje1team.pack(pady=20)
+            zvanjet2 = Label(unosv, font=Unosvfont, text="Zvanje (TEAM 2)")
+            zvanjet2.config(bg="green")
+            zvanjet2.pack(pady=20)
             zvanje2team = Entry(unosv, font=NewFont2)
-            zvanje2team.pack()
+            zvanje2team.pack(pady=20)
 
             def labelcreation(event123425):
                 global ukupnibodovi1
                 global ukupnibodovi2
-                global roundcounter
+                global canvas
                 f = brojbodova1team.get()
                 if f == "":
                     f = 0
@@ -122,12 +102,12 @@ def new(event1):
                 gint = 162 - fint
                 fuk = fint + zvanje1teamaint
                 guk = gint + zvanje2teamaint
-                Label(igra1, font=Unosvfont, text="" + str(fuk) + "                     "+str(guk)).pack(in_=top1)
+                Label(igra1, font=Unosvfont, text="" + str(fuk) + "                     " + str(guk)).pack(in_=top1)
                 unosv.destroy()
                 unosv.update()
                 ukupnibodovi1 = ukupnibodovi1 + fuk
                 ukupnibodovi2 = ukupnibodovi2 + guk
-                ukupnibodovi.config(text=" " + str(ukupnibodovi1) + "                     "+str(ukupnibodovi2))
+                ukupnibodovi.config(text=" " + str(ukupnibodovi1) + "                     " + str(ukupnibodovi2))
                 if ukupnibodovi1 >= bpint or ukupnibodovi2 >= bpint:
                     if ukupnibodovi1 >= bpint:
                         if ukupnibodovi1 >= bpint and ukupnibodovi2 >= bpint:
@@ -144,6 +124,8 @@ def new(event1):
                         else:
                             rezultat_timovi.config(text="TEAM 2 JE POBJEDNIK!")
                 return
+
+
             unesigame = Button(unosv, text="UNESI")
             unesigame.bind("<Button>", labelcreation)
             unesigame.pack()
@@ -151,15 +133,28 @@ def new(event1):
             unesigame.pack()
             unesigame.config(bg="red")
             unesigame.place(y=600, height=100, width=500)
-            unosv.mainloop()
+
+            #canvas = Canvas(top1)
+            #canvas.pack(side=LEFT)
+            #canvas.configure(yscrollcommand=sb.set)
+            #canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+            #myframe = Frame(canvas)
+            #canvas.create_window((0, 0), window=myframe, anchor="nw")
+            #unosv.mainloop()
             return
 
+        def onFrameConfigure(canvas):
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        sb = Scrollbar(top1, orient="vertical")
+        sb.pack(side=RIGHT, fill="y")
         global ukupnibodovi1
         global ukupnibodovi2
         bottom = Frame(igra1)
         bottom.pack(side=BOTTOM, pady=60)
         font1234 = font.Font(family="Helvatica", size=25)
-        ukupnibodovi = Label(igra1, font=font1234, text=" " + str(ukupnibodovi1) + "                    " + str(ukupnibodovi2))
+        ukupnibodovi = Label(igra1, font=font1234,
+                             text="" + str(ukupnibodovi1) + "                    " + str(ukupnibodovi2))
         ukupnibodovi.place(y=550, height=50, width=500)
         ukupnibodovi.config(bg="green")
         noviunos = Button(igra1, text="NOVI UNOS")
@@ -167,12 +162,12 @@ def new(event1):
         noviunos["font"] = NewFont3
         noviunos.config(bg="red")
         noviunos.pack()
-        noviunos.place(y=600, height =100, width=500)
+        noviunos.place(y=600, height=100, width=500)
 
         rezultat = Label(igra1, text="Igra: " + a)
         rezultat["font"] = NewFont2
         rezultat.pack(in_=top)
-        rezultat_timovi = Label(igra1, text="TEAM 1.                   TEAM 2.")
+        rezultat_timovi = Label(igra1, text=" TEAM 1.                   TEAM 2.")
         fontic = font.Font(family="Helvetica", size=15)
         Label(igra1, font=fontic, text="Bodovni prag: " + str(bp)).pack(in_=top)
         rezultat_timovi["font"] = NewFont2
@@ -194,25 +189,16 @@ def new(event1):
     return
 
 
-def load(event5):
-    loadp = Toplevel(main)
-    loadp.geometry("500x600+1170+0")
-    loadp.title("Load")
-    Loadfont = font.Font(family="Helvatica", size=20)
-    Label(loadp, font=Loadfont, text='IME IGRE:').pack()
-    arr = os.listdir("C:/Users/Windows/PycharmProjects/Bela/GamesBela/")
-    listlen = len(arr)
-    Buttonsss = []
-    loadp.mainloop()
-
 # Glavni prozor
 main = Tk()
-main.geometry("500x700+1170+0")
+main.geometry("500x600+1170+0")
 main.resizable(False, False)
 main.title("Bela Blok")
-praznina = Label(main, text=" \n \n \n \n").pack()
-
-
+main.config(bg="green")
+naslovfont = font.Font(family="Helvatica", size=50)
+naslov = Label(main, font=naslovfont, text="Bela Block")
+naslov.config(bg="green")
+naslov.pack(pady=20)
 # New-gumb
 NewFont = font.Font(family="Helvatica", size=50)
 newgame = Button(main, text="NEW GAME")
@@ -220,21 +206,13 @@ newgame.bind("<Button>", new)
 newgame["font"] = NewFont
 newgame.pack()
 newgame.config(bg="red")
-newgame.place(y=400, height=100, width=500)
-
-# Load-gumb
-NewFont = font.Font(family="Helvatica", size=50)
-loadgame = Button(main, text="LOAD GAME")
-loadgame.bind("<Button>", load)
-loadgame["font"] = NewFont
-loadgame.pack()
-loadgame.config(bg="green")
-loadgame.place(y=550, height=100, width=500)
+newgame.place(y=470, height=100, width=500)
 
 # Glavna slika
-glavnaslika = Canvas(main, width=300, height=300)
+glavnaslika = Canvas(main, width=500, height=300)
+glavnaslika.config(bg="green")
 glavnaslika.pack()
 img = ImageTk.PhotoImage(Image.open("Bela2.png"))
-glavnaslika.create_image(150, 100, image=img)
+glavnaslika.create_image(250, 140, image=img)
 
 main.mainloop()
